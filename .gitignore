@@ -8,29 +8,23 @@ build/
 *.iml
 *.iws
 *.ipr
-*.apk
 
 # Android build
 local.properties
 *.jks
 *.keystore
 
-# Mac
+# OS
 .DS_Store
+Thumbs.db
 
 # Environment
 .env
 *.env
-用户密钥.env
-
-# Node (if any)
-node_modules/
-npm-debug.log
 
 # Misc
 .classpath
 .project
 .settings/
 *.class
-*.jar
 *.log
