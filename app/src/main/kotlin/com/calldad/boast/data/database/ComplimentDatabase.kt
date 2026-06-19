@@ -26,7 +26,6 @@ abstract class ComplimentDatabase : RoomDatabase() {
                     "compliment_database"
                 )
                     .setJournalMode(RoomDatabase.JournalMode.WRITE_AHEAD_LOGGING)
-                    .setQueryExecutor(java.util.concurrent.Executors.newFixedThreadPool(1))
                     .build()
                 INSTANCE = instance
                 instance
@@ -34,6 +33,7 @@ abstract class ComplimentDatabase : RoomDatabase() {
         }
 
         fun destroyInstance() {
+            INSTANCE?.close()
             INSTANCE = null
         }
     }

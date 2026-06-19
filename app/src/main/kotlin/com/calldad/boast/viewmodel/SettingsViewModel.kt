@@ -248,7 +248,8 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
     
     suspend fun exportCompliments(): String {
         return try {
-            val allCompliments = database.complimentDao().getAllCompliments()
+            // 使用 first() 从 Flow 中获取实际数据列表
+            val allCompliments = database.complimentDao().getAllCompliments().first()
             val gson = com.google.gson.GsonBuilder().setPrettyPrinting().create()
             gson.toJson(allCompliments)
         } catch (e: Exception) {
@@ -264,7 +265,9 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
             var importedCount = 0
             compliments.forEach { compliment ->
                 try {
-                    database.complimentDao().insertCompliment(compliment)
+                    // 重置 id 为 0，让 Room 自动生成新 ID，避免导入时 ID 冲突导致覆盖
+                    val newCompliment = compliment.copy(id = 0)
+                    database.complimentDao().insertCompliment(newCompliment)
                     importedCount++
                 } catch (e: Exception) {
                     Log.e("SettingsViewModel", "导入单条夸赞失败: ${compliment.text}", e)

@@ -84,11 +84,15 @@ fun MainScreen(
     
     // 初始化加载状态
     var isInitialized by remember { mutableStateOf(false) }
-    
+    // 长按按钮状态，从设置页返回后需重置
+    var isLongPressed by remember { mutableStateOf(false) }
+
     LaunchedEffect(Unit) {
         // 模拟初始化加载
         kotlinx.coroutines.delay(500)
         isInitialized = true
+        // 从设置页返回后重置按钮状态
+        isLongPressed = false
     }
     
     // 创建背景修饰符 - 使用 remember 缓存计算结果
@@ -194,7 +198,6 @@ fun MainScreen(
                         
                         // 夸赞按钮 - 点击生成随机夸赞语句，长按进入设置页面
                         var isPressed by remember { mutableStateOf(false) }
-                        var isLongPressed by remember { mutableStateOf(false) }
                         val scale by animateFloatAsState(
                             targetValue = if (isPressed) 0.95f else 1f,
                             animationSpec = spring(
