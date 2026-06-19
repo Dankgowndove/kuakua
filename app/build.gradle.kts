@@ -122,6 +122,7 @@ dependencies {
     implementation(libs.markwon.syntax.highlight)
     implementation(libs.prism4j)
     implementation(libs.gson)
+    implementation(libs.androidx.appcompat)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 }

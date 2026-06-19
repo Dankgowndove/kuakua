@@ -21,6 +21,7 @@ markwonHtml = "4.6.2"
 markwonSyntaxHighlight = "4.6.2"
 prism4j = "2.0.0"
 gson = "2.13.2"
+appcompat = "1.7.0"
 sqliteJdbc = "3.41.2.2"
 
 [plugins]
@@ -55,4 +56,5 @@ markwon-html = { group = "io.noties.markwon", name = "html", version.ref = "mark
 markwon-syntax-highlight = { group = "io.noties.markwon", name = "syntax-highlight", version.ref = "markwonSyntaxHighlight" }
 prism4j = { group = "io.noties", name = "prism4j", version.ref = "prism4j" }
 gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 sqlite-jdbc = { group = "org.xerial", name = "sqlite-jdbc", version.ref = "sqliteJdbc" }

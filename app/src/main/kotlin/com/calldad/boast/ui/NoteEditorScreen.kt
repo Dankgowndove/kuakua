@@ -34,6 +34,7 @@ import androidx.compose.ui.viewinterop.AndroidView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.text.NumberFormat
+import kotlin.text.RegexOption
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -470,8 +471,8 @@ private fun FindReplaceDialog(
 
     remember(findText, text, caseSensitive) {
         if (findText.isNotEmpty()) {
-            val flags = if (caseSensitive) 0 else Regex.IGNORE_CASE
-            matchCount = Regex(Regex.escape(findText), flags).findAll(text).count()
+            val options: Set<RegexOption> = if (caseSensitive) emptySet() else setOf(RegexOption.IGNORE_CASE)
+            matchCount = Regex(Regex.escape(findText), options).findAll(text).count()
         } else {
             matchCount = 0
         }
@@ -514,9 +515,9 @@ private fun FindReplaceDialog(
                     OutlinedButton(
                         onClick = {
                             if (findText.isNotEmpty()) {
-                                val flags = if (caseSensitive) 0 else Regex.IGNORE_CASE
+                                val options: Set<RegexOption> = if (caseSensitive) emptySet() else setOf(RegexOption.IGNORE_CASE)
                                 onReplace(text.replace(
-                                    Regex(Regex.escape(findText), flags), replaceText
+                                    Regex(Regex.escape(findText), options), replaceText
                                 ))
                             }
                         },

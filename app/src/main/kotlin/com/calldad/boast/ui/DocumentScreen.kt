@@ -246,7 +246,7 @@ fun DocumentScreen(
 }
 
 private fun createMarkwon(context: Context): Markwon {
-    val prism4j = Prism4j { null }
+    val prism4j = Prism4j(io.noties.prism4j.GrammarLocator { null })
     return Markwon.builder(context)
         .usePlugin(CorePlugin.create())
         .usePlugin(SyntaxHighlightPlugin.create(prism4j, Prism4jThemeDarkula.create()))

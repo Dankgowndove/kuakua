@@ -17,10 +17,16 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -66,6 +72,7 @@ import com.calldad.boast.ui.components.PopupTextsList
  * 4. 与ViewModel交互，处理按钮点击事件
  * 5. 应用背景设置（纯色、渐变、图片）
  */
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen(
     viewModel: ComplimentViewModel = viewModel(),
@@ -84,15 +91,11 @@ fun MainScreen(
     
     // 初始化加载状态
     var isInitialized by remember { mutableStateOf(false) }
-    // 长按按钮状态，从设置页返回后需重置
-    var isLongPressed by remember { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {
         // 模拟初始化加载
         kotlinx.coroutines.delay(500)
         isInitialized = true
-        // 从设置页返回后重置按钮状态
-        isLongPressed = false
     }
     
     // 创建背景修饰符 - 使用 remember 缓存计算结果
@@ -136,6 +139,24 @@ fun MainScreen(
     Scaffold(
         modifier = modifier.fillMaxSize(),
         containerColor = Color.Transparent,
+        topBar = {
+            TopAppBar(
+                title = { },
+                actions = {
+                    IconButton(onClick = onNavigateToSettings) {
+                        Icon(
+                            Icons.Default.Settings,
+                            contentDescription = "设置",
+                            tint = MaterialTheme.colorScheme.onBackground
+                        )
+                    }
+                },
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = Color.Transparent,
+                    scrolledContainerColor = Color.Transparent
+                )
+            )
+        },
         content = { innerPadding ->
             // 主内容区域
             Box(
@@ -196,7 +217,7 @@ fun MainScreen(
                             }
                         )
                         
-                        // 夸赞按钮 - 点击生成随机夸赞语句，长按进入设置页面
+                        // 夸赞按钮 - 点击生成随机夸赞语句
                         var isPressed by remember { mutableStateOf(false) }
                         val scale by animateFloatAsState(
                             targetValue = if (isPressed) 0.95f else 1f,
@@ -206,15 +227,9 @@ fun MainScreen(
                             ),
                             label = "buttonScale"
                         )
-                        
-                        val buttonColor = if (isLongPressed) {
-                            MaterialTheme.colorScheme.secondary
-                        } else {
-                            MaterialTheme.colorScheme.primary
-                        }
-                        
+
                         val interactionSource = remember { androidx.compose.foundation.interaction.MutableInteractionSource() }
-                        
+
                         // 监听按钮按下和释放状态
                         LaunchedEffect(interactionSource) {
                             interactionSource.interactions.collect { interaction ->
@@ -229,34 +244,25 @@ fun MainScreen(
                                 }
                             }
                         }
-                        
+
                         Box(
                             modifier = Modifier
                                 .padding(bottom = 32.dp)
                                 .scale(scale)
                                 .clip(RoundedCornerShape(20.dp))
-                                .background(buttonColor)
+                                .background(MaterialTheme.colorScheme.primary)
                                 .combinedClickable(
                                     onClick = {
-                                        isLongPressed = false
                                         viewModel.generateRandomCompliment()
-                                    },
-                                    onLongClick = {
-                                        isLongPressed = true
-                                        onNavigateToSettings()
                                     }
                                 )
                                 .padding(horizontal = 32.dp, vertical = 16.dp),
                             contentAlignment = Alignment.Center
                         ) {
                             Text(
-                                text = if (isLongPressed) "进入设置..." else "夸我一下",
+                                text = "夸我一下",
                                 style = MaterialTheme.typography.titleMedium,
-                                color = if (isLongPressed) {
-                                    MaterialTheme.colorScheme.onSecondary
-                                } else {
-                                    MaterialTheme.colorScheme.onPrimary
-                                }
+                                color = MaterialTheme.colorScheme.onPrimary
                             )
                         }
                     }
