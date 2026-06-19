@@ -44,8 +44,7 @@ android {
         debug {
             isMinifyEnabled = false
             isShrinkResources = false
-            // Debug 模式关闭调试可减少内存占用
-            isDebuggable = false
+            isDebuggable = true
         }
     }
 
@@ -94,8 +93,6 @@ ksp {
     arg("room.generateKotlin", "true")
     arg("room.useAndroidX", "true")
     arg("room.expandProjection", "true")
-    // AndroidIDE 下跳过 Room 数据库验证（SQLite native lib 加载失败）
-    arg("room.skipVerification", "true")
 }
 
 dependencies {
