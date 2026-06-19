@@ -43,16 +43,16 @@ jobs:
       run: chmod +x ./gradlew
 
     - name: Clean previous build
-      run: ./gradlew clean --info
+      run: ./gradlew clean
 
     - name: Build Debug APK
-      run: ./gradlew assembleDebug --build-cache --info --stacktrace
+      run: ./gradlew assembleDebug --build-cache
 
     - name: Build Release APK
-      run: ./gradlew assembleRelease --build-cache --info --stacktrace
+      run: ./gradlew assembleRelease --build-cache
 
     - name: Run Lint Check
-      run: ./gradlew lint --info || true
+      run: ./gradlew lint || true
 
     - name: Show build summary
       if: always()

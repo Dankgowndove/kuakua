@@ -3,6 +3,7 @@ package com.calldad.boast.ui
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import android.util.AttributeSet
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint

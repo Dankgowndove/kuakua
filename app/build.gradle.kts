@@ -29,7 +29,7 @@ android {
         vectorDrawables.useSupportLibrary = true
 
         // 资源压缩配置 - 减少语言配置以加快构建
-        resourceConfigurations += setOf("zh", "zh-rCN")
+        androidResources.localeFilters += setOf("zh", "zh-rCN")
     }
 
     buildTypes {

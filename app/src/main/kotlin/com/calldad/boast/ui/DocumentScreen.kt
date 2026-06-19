@@ -21,6 +21,7 @@ import io.noties.markwon.Markwon
 import io.noties.markwon.core.CorePlugin
 import io.noties.markwon.syntax.Prism4jThemeDarkula
 import io.noties.markwon.syntax.SyntaxHighlightPlugin
+import io.noties.prism4j.GrammarLocator
 import io.noties.prism4j.Prism4j
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -245,7 +246,7 @@ fun DocumentScreen(
 }
 
 private fun createMarkwon(context: Context): Markwon {
-    val prism4j = Prism4j { _ -> null }
+    val prism4j = Prism4j(GrammarLocator { _, _ -> null })
     return Markwon.builder(context)
         .usePlugin(CorePlugin.create())
         .usePlugin(SyntaxHighlightPlugin.create(prism4j, Prism4jThemeDarkula.create()))
