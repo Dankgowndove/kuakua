@@ -1,0 +1,36 @@
+# Gradle
+.gradle/
+build/
+*.gradle.kts.bak
+
+# Android Studio / IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+*.apk
+
+# Android build
+local.properties
+*.jks
+*.keystore
+
+# Mac
+.DS_Store
+
+# Environment
+.env
+*.env
+用户密钥.env
+
+# Node (if any)
+node_modules/
+npm-debug.log
+
+# Misc
+.classpath
+.project
+.settings/
+*.class
+*.jar
+*.log

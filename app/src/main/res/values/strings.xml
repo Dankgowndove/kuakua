@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">猪猪</string>
+    <string name="button_compliment">夸我一下</string>
+    <string name="empty_state_title">等待夸赞</string>
+    <string name="empty_state_description">点击下方按钮获取随机夸赞\n每一条夸赞都会以弹窗形式显示</string>
+    <string name="empty_state_hint">试试点击 "夸我一下" 按钮</string>
+    <string name="music_loading">背景音乐加载中…</string>
+    <string name="music_error">背景音乐加载失败</string>
+    <string name="compliment_count">已收到 %d 条夸赞</string>
+    <string name="clear_all">清空所有</string>
+    <string name="settings">设置</string>
+    <string name="about">关于</string>
+    <string name="version">版本 1.1</string>
+</resources>
