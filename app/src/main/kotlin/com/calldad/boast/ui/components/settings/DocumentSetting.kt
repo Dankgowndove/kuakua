@@ -94,7 +94,7 @@ fun DocumentListItem(
             .fillMaxWidth()
             .clickable(onClick = onClick)
     )
-    Divider()
+    HorizontalDivider()
 }
 
 data class DocumentItem(

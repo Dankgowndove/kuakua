@@ -91,8 +91,6 @@ ksp {
     arg("room.schemaLocation", "$projectDir/schemas")
     arg("room.incremental", "true")
     arg("room.generateKotlin", "true")
-    arg("room.useAndroidX", "true")
-    arg("room.expandProjection", "true")
 }
 
 dependencies {
@@ -104,7 +102,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
-    implementation("androidx.compose.material:material-icons-extended")
+    implementation(libs.androidx.material.icons.extended)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.androidx.navigation.compose)
@@ -114,8 +112,6 @@ dependencies {
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
     ksp(libs.androidx.room.compiler)
-    // SQLite JDBC for Room schema verification
-    implementation(libs.sqlite.jdbc)
     implementation(libs.coil.compose)
     implementation(libs.markwon.core)
     implementation(libs.markwon.html)

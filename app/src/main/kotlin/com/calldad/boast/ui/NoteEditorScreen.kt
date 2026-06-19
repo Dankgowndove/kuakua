@@ -8,7 +8,6 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.AttributeSet
 import android.view.inputmethod.EditorInfo
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.compose.foundation.layout.*

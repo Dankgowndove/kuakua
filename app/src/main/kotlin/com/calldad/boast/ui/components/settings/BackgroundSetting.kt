@@ -30,6 +30,7 @@ fun BackgroundSetting(viewModel: SettingsViewModel) {
     val context = LocalContext.current
     val backgroundType by viewModel.backgroundType.collectAsState()
     val backgroundColor by viewModel.backgroundColor.collectAsState()
+    val backgroundGradient by viewModel.backgroundGradient.collectAsState()
     val backgroundImagePath by viewModel.backgroundImagePath.collectAsState()
     
     // 配置优化的ImageLoader
@@ -183,12 +184,12 @@ fun BackgroundSetting(viewModel: SettingsViewModel) {
                     items(gradients.size) { index ->
                         val gradient = gradients[index]
                         val colors = gradient.split("|").drop(1)
-                        val isSelected = backgroundColor == gradient
+                        val isSelected = backgroundGradient == gradient
                         Box(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .height(50.dp)
-                                .clickable { viewModel.setBackgroundColor(gradient) }
+                                .clickable { viewModel.setBackgroundGradient(gradient) }
                         ) {
                             Box(
                                 modifier = Modifier

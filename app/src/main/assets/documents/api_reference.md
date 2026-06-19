@@ -12,6 +12,7 @@ app/src/main/kotlin/com/calldad/boast/
 │   ├── MainScreen.kt
 │   ├── SettingsScreen.kt
 │   ├── DocumentScreen.kt
+│   ├── NoteEditorScreen.kt
 │   ├── components/
 │   │   ├── PopupTextItem.kt
 │   │   ├── PopupTextsList.kt
@@ -51,7 +52,7 @@ app/src/main/kotlin/com/calldad/boast/
 管理夸赞语句的生成和显示。
 
 ```kotlin
-class ComplimentViewModel : ViewModel() {
+class ComplimentViewModel(application: Application) : AndroidViewModel(application) {
     val currentTexts: StateFlow<List<PopupTextData>>
     fun generateRandomCompliment()
     fun clearAllCompliments()
@@ -93,7 +94,7 @@ class AppPreferences(private val context: Context) {
 Room 数据库，存储夸赞语句。
 
 ```kotlin
-@Database(entities = [ComplimentEntity::class], version = 1)
+@Database(entities = [ComplimentEntity::class], version = 1, exportSchema = false)
 abstract class ComplimentDatabase : RoomDatabase() {
     abstract fun complimentDao(): ComplimentDao
 }

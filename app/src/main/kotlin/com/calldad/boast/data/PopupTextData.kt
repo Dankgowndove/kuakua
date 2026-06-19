@@ -15,9 +15,8 @@ package com.calldad.boast.data
  * 功能：表示单个夸赞语句的数据结构
  * 设计原则：
  * 1. 使用data class获得自动生成的equals/hashCode/toString/copy方法
- * 2. 实现Parcelable接口以便在Android组件间传递
- * 3. 提供默认参数值，便于测试和预览
- * 4. 包含唯一ID，用于列表项的关键字优化
+ * 2. 提供默认参数值，便于测试和预览
+ * 3. 包含唯一ID，用于列表项的关键字优化
  */
 data class PopupTextData(
     val id: String,
@@ -115,13 +114,11 @@ val COMPLIMENTS_LIST = listOf(
  *    - 包含唯一ID便于状态管理和列表优化
  * 
  * 2. 数据源：
- *    - COMPLIMENTS_LIST是主要数据源，包含50条夸赞语句
+ *    - COMPLIMENTS_LIST是主要数据源，包含40条夸赞语句
  *    - 语句多样化，覆盖不同场景和情感需求
  *    - 使用常量定义，编译时确定，性能好
  * 
  * 3. 扩展性：
- *    - 支持按类别分组（COMPLIMENTS_BY_CATEGORY）
- *    - 提供辅助函数便于使用
  *    - 易于扩展为动态数据源（网络、数据库等）
  * 
  * 4. 使用建议：

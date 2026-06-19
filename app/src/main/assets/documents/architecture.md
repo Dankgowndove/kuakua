@@ -5,8 +5,8 @@
 - **开发语言**：Kotlin
 - **UI框架**：Jetpack Compose
 - **设计规范**：Material Design 3
-- **最低版本**：Android 5.0 (API 21)
-- **目标版本**：Android 14 (API 36)
+- **最低版本**：Android 6.0 (API 23)
+- **目标版本**：Android 16 (API 36)
 
 ## 架构模式
 
@@ -37,7 +37,6 @@
 
 - **DataStore**：存储用户设置
 - **Room**：存储夸赞语句数据
-- **SharedPreferences**：兼容旧版数据存储
 
 ### 2. 音乐播放
 
@@ -74,8 +73,9 @@ MainActivity
     │   │   └─ ComplimentViewModel
     │   ├─ SettingsScreen
     │   │   └─ SettingsViewModel
-    │   └─ DocumentScreen
-    │        └─ DocumentViewModel
+    │   ├─ DocumentScreen
+    │   │    └─ DocumentViewModel
+    │   └─ NoteEditorScreen
     ├─ MusicPlayer
     └─ AppPreferences
 ```

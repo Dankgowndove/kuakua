@@ -1,13 +1,8 @@
 package com.calldad.boast.ui
 
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.spring
-import androidx.compose.animation.expandVertically
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Box
@@ -127,7 +122,7 @@ fun MainScreen(
             }
             "image" -> {
                 if (backgroundImagePath != null) {
-                    Modifier
+                    Modifier.background(Color.White)
                 } else {
                     Modifier.background(Color.White)
                 }
