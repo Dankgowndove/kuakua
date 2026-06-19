@@ -246,7 +246,10 @@ fun DocumentScreen(
 }
 
 private fun createMarkwon(context: Context): Markwon {
-    val prism4j = Prism4j(GrammarLocator { _, _ -> null })
+    val prism4j = Prism4j(object : GrammarLocator {
+        override fun grammar(prism4j: Prism4j, language: String): Prism4j.Grammar? = null
+        override fun languages(): Set<String> = emptySet()
+    })
     return Markwon.builder(context)
         .usePlugin(CorePlugin.create())
         .usePlugin(SyntaxHighlightPlugin.create(prism4j, Prism4jThemeDarkula.create()))
