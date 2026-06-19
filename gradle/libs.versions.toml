@@ -22,6 +22,7 @@ markwonSyntaxHighlight = "4.6.2"
 prism4j = "2.0.0"
 gson = "2.13.2"
 appcompat = "1.7.0"
+jetbrainsAnnotations = "24.0.1"
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -57,3 +58,4 @@ prism4j = { group = "io.noties", name = "prism4j", version.ref = "prism4j" }
 gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 androidx-material-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended" }
+jetbrains-annotations = { group = "org.jetbrains", name = "annotations", version.ref = "jetbrainsAnnotations" }

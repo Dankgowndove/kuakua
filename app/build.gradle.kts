@@ -10,11 +10,6 @@ android {
     namespace = "com.calldad.boast"
     compileSdk = 36
 
-    configurations.all {
-        // 排除重复的 annotations 依赖以避免构建错误
-        exclude(group = "org.jetbrains", module = "annotations")
-        exclude(group = "org.jetbrains", module = "annotations-java5")
-    }
 
     defaultConfig {
         applicationId = "com.calldad.boast"
@@ -119,6 +114,7 @@ dependencies {
     implementation(libs.prism4j)
     implementation(libs.gson)
     implementation(libs.androidx.appcompat)
+    implementation(libs.jetbrains.annotations)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 }
