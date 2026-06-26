@@ -15,6 +15,7 @@ class BoastApplication : Application() {
      * 内存修剪回调
      * level 表示内存紧张程度
      */
+    @Suppress("DEPRECATION")
     override fun onTrimMemory(level: Int) {
         super.onTrimMemory(level)
         

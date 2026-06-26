@@ -16,8 +16,8 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.Redo
-import androidx.compose.material.icons.filled.Undo
+import androidx.compose.material.icons.automirrored.filled.Redo
+import androidx.compose.material.icons.automirrored.filled.Undo
 import androidx.compose.material.icons.filled.BarChart
 import androidx.compose.material.icons.filled.ContentCopy
 import androidx.compose.material.icons.filled.FindReplace
@@ -99,7 +99,7 @@ fun NoteEditorScreen(
                         },
                         enabled = canUndo
                     ) {
-                        Icon(Icons.Default.Undo, contentDescription = "撤销")
+                        Icon(Icons.AutoMirrored.Filled.Undo, contentDescription = "撤销")
                     }
                     IconButton(
                         onClick = {
@@ -116,7 +116,7 @@ fun NoteEditorScreen(
                         },
                         enabled = canRedo
                     ) {
-                        Icon(Icons.Default.Redo, contentDescription = "重做")
+                        Icon(Icons.AutoMirrored.Filled.Redo, contentDescription = "重做")
                     }
                     IconButton(onClick = {
                         copyLineNumbers(context, textContent)
