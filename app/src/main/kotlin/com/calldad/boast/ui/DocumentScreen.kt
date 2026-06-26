@@ -233,7 +233,7 @@ fun DocumentScreen(
                                 android.widget.TextView(context).apply {
                                     setText(markwon.toMarkdown(documentContent))
                                     setMovementMethod(android.text.method.LinkMovementMethod.getInstance())
-                                    setTextAppearance(android.R.style.TextAppearance_Medium)
+                                    setTextAppearance(context, android.R.style.TextAppearance_Medium)
                                 }
                             },
                             modifier = Modifier.fillMaxSize()

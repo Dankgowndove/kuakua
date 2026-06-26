@@ -2,8 +2,6 @@ package com.calldad.boast.ui.components.settings
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material3.*
@@ -27,11 +25,10 @@ fun DocumentSetting(
     Card(
         modifier = Modifier.fillMaxWidth()
     ) {
-        LazyColumn(
-            modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(0.dp)
+        Column(
+            modifier = Modifier.fillMaxWidth()
         ) {
-            items(documents) { document ->
+            documents.forEach { document ->
                 DocumentListItem(
                     document = document,
                     onClick = { onNavigateToDocument(document.id) },

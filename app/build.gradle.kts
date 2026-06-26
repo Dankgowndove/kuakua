@@ -56,7 +56,8 @@ android {
             // 禁用 Compose 编译器报告以加快构建速度
             freeCompilerArgs.addAll(
                 "-opt-in=kotlin.RequiresOptIn",
-                "-opt-in=androidx.compose.material3.ExperimentalMaterial3Api"
+                "-opt-in=androidx.compose.material3.ExperimentalMaterial3Api",
+                "-opt-in=androidx.media3.common.util.UnstableApi"
             )
         }
     }

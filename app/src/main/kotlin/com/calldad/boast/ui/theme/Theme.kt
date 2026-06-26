@@ -14,15 +14,15 @@ import androidx.compose.ui.platform.LocalContext
 import com.calldad.boast.viewmodel.SettingsViewModel
 
 val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80
+    primary = Green80,
+    secondary = GreenGrey80,
+    tertiary = LightGreen80
 )
 
 val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
-    tertiary = Pink40
+    primary = Green40,
+    secondary = GreenGrey40,
+    tertiary = LightGreen40
 )
 
 @Composable

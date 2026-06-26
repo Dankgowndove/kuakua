@@ -3,8 +3,8 @@ package com.calldad.boast.ui.components.settings
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Delete
@@ -168,11 +168,11 @@ fun WordLibrarySetting(viewModel: SettingsViewModel) {
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             } else {
-                LazyColumn(
+                Column(
                     verticalArrangement = Arrangement.spacedBy(8.dp),
-                    modifier = Modifier.heightIn(max = 200.dp)
+                    modifier = Modifier.heightIn(max = 200.dp).verticalScroll(rememberScrollState())
                 ) {
-                    items(customCompliments) { compliment ->
+                    customCompliments.forEach { compliment ->
                         ComplimentItem(
                             compliment = compliment,
                             onEdit = { editingCompliment = compliment },
@@ -206,28 +206,66 @@ fun WordLibrarySetting(viewModel: SettingsViewModel) {
     }
     
     if (exportMessage != null) {
-        Snackbar(
-            modifier = Modifier.padding(16.dp),
-            action = {
-                TextButton(onClick = { exportMessage = null }) {
-                    Text("关闭")
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.BottomCenter
+        ) {
+            Surface(
+                modifier = Modifier.padding(16.dp),
+                shape = RoundedCornerShape(4.dp),
+                color = MaterialTheme.colorScheme.inverseSurface,
+                shadowElevation = 6.dp
+            ) {
+                Row(
+                    modifier = Modifier.padding(start = 16.dp, end = 4.dp, top = 4.dp, bottom = 4.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = exportMessage!!,
+                        modifier = Modifier.weight(1f),
+                        color = MaterialTheme.colorScheme.inverseOnSurface
+                    )
+                    TextButton(onClick = { exportMessage = null }) {
+                        Text("关闭")
+                    }
                 }
             }
-        ) {
-            Text(exportMessage!!)
+        }
+        LaunchedEffect(exportMessage) {
+            kotlinx.coroutines.delay(3000)
+            exportMessage = null
         }
     }
     
     if (importMessage != null) {
-        Snackbar(
-            modifier = Modifier.padding(16.dp),
-            action = {
-                TextButton(onClick = { importMessage = null }) {
-                    Text("关闭")
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.BottomCenter
+        ) {
+            Surface(
+                modifier = Modifier.padding(16.dp),
+                shape = RoundedCornerShape(4.dp),
+                color = MaterialTheme.colorScheme.inverseSurface,
+                shadowElevation = 6.dp
+            ) {
+                Row(
+                    modifier = Modifier.padding(start = 16.dp, end = 4.dp, top = 4.dp, bottom = 4.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = importMessage!!,
+                        modifier = Modifier.weight(1f),
+                        color = MaterialTheme.colorScheme.inverseOnSurface
+                    )
+                    TextButton(onClick = { importMessage = null }) {
+                        Text("关闭")
+                    }
                 }
             }
-        ) {
-            Text(importMessage!!)
+        }
+        LaunchedEffect(importMessage) {
+            kotlinx.coroutines.delay(3000)
+            importMessage = null
         }
     }
 }

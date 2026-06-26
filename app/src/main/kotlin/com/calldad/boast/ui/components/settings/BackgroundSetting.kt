@@ -6,8 +6,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -133,14 +131,11 @@ fun BackgroundSetting(viewModel: SettingsViewModel) {
                     "#6200EE", "#03DAC6", "#FF5722",
                     "#4CAF50", "#2196F3", "#E91E63"
                 )
-                LazyVerticalGrid(
-                    columns = GridCells.Fixed(3),
+                FlowRow(
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
-                    verticalArrangement = Arrangement.spacedBy(8.dp),
-                    modifier = Modifier.height(120.dp)
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    items(solidColors.size) { index ->
-                        val color = solidColors[index]
+                    solidColors.forEach { color ->
                         val isSelected = backgroundColor == color
                         Box(
                             modifier = Modifier
@@ -175,39 +170,45 @@ fun BackgroundSetting(viewModel: SettingsViewModel) {
                     "linear|#FF5722|#E64A19",
                     "linear|#4CAF50|#388E3C"
                 )
-                LazyVerticalGrid(
-                    columns = GridCells.Fixed(2),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
-                    verticalArrangement = Arrangement.spacedBy(8.dp),
-                    modifier = Modifier.height(120.dp)
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    items(gradients.size) { index ->
-                        val gradient = gradients[index]
-                        val colors = gradient.split("|").drop(1)
-                        val isSelected = backgroundGradient == gradient
-                        Box(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(50.dp)
-                                .clickable { viewModel.setBackgroundGradient(gradient) }
+                    gradients.chunked(2).forEach { rowGradients ->
+                        Row(
+                            horizontalArrangement = Arrangement.spacedBy(8.dp),
+                            modifier = Modifier.fillMaxWidth()
                         ) {
-                            Box(
-                                modifier = Modifier
-                                    .fillMaxSize()
-                                    .background(
-                                        brush = Brush.linearGradient(
-                                            colors = colors.map {
-                                                Color(android.graphics.Color.parseColor(it))
-                                            }
-                                        ),
-                                        shape = RoundedCornerShape(8.dp)
+                            rowGradients.forEach { gradient ->
+                                val colors = gradient.split("|").drop(1)
+                                val isSelected = backgroundGradient == gradient
+                                Box(
+                                    modifier = Modifier
+                                        .weight(1f)
+                                        .height(50.dp)
+                                        .clickable { viewModel.setBackgroundGradient(gradient) }
+                                ) {
+                                    Box(
+                                        modifier = Modifier
+                                            .fillMaxSize()
+                                            .background(
+                                                brush = Brush.linearGradient(
+                                                    colors = colors.map {
+                                                        Color(android.graphics.Color.parseColor(it))
+                                                    }
+                                                ),
+                                                shape = RoundedCornerShape(8.dp)
+                                            )
                                     )
-                            )
-                            if (isSelected) {
-                                Surface(
-                                    color = Color.White.copy(alpha = 0.3f),
-                                    shape = RoundedCornerShape(8.dp)
-                                ) {}
+                                    if (isSelected) {
+                                        Surface(
+                                            color = Color.White.copy(alpha = 0.3f),
+                                            shape = RoundedCornerShape(8.dp)
+                                        ) {}
+                                    }
+                                }
+                            }
+                            if (rowGradients.size == 1) {
+                                Spacer(modifier = Modifier.weight(1f))
                             }
                         }
                     }
@@ -296,22 +297,37 @@ fun BackgroundSetting(viewModel: SettingsViewModel) {
     }
 
     if (showPermissionDeniedMessage) {
-        Snackbar(
-            modifier = Modifier.padding(16.dp),
-            action = {
-                TextButton(onClick = {
-                    val intent = android.content.Intent(
-                        android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
-                        android.net.Uri.fromParts("package", context.packageName, null)
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.BottomCenter
+        ) {
+            Surface(
+                modifier = Modifier.padding(16.dp),
+                shape = RoundedCornerShape(4.dp),
+                color = MaterialTheme.colorScheme.inverseSurface,
+                shadowElevation = 6.dp
+            ) {
+                Row(
+                    modifier = Modifier.padding(start = 16.dp, end = 4.dp, top = 4.dp, bottom = 4.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = "需要存储权限才能选择图片",
+                        modifier = Modifier.weight(1f),
+                        color = MaterialTheme.colorScheme.inverseOnSurface
                     )
-                    context.startActivity(intent)
-                    showPermissionDeniedMessage = false
-                }) {
-                    Text("去设置")
+                    TextButton(onClick = {
+                        val intent = android.content.Intent(
+                            android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                            android.net.Uri.fromParts("package", context.packageName, null)
+                        )
+                        context.startActivity(intent)
+                        showPermissionDeniedMessage = false
+                    }) {
+                        Text("去设置")
+                    }
                 }
             }
-        ) {
-            Text("需要存储权限才能选择图片")
         }
         LaunchedEffect(Unit) {
             kotlinx.coroutines.delay(4000)

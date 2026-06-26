@@ -255,7 +255,7 @@ private fun copyLineNumbers(context: Context, text: String) {
     for (i in lines.indices) {
         sb.append(i + 1).append('\n')
     }
-    val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+    val clipboard = context.getSystemService(ClipboardManager::class.java)
     clipboard.setPrimaryClip(ClipData.newPlainText("行号", sb.trimEnd().toString()))
 }
 
@@ -593,18 +593,22 @@ class LinedEditText(
     private val gutterWidthPx: Float
     private val gutterMarginPx: Float
 
-    private val gutterBgPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+    private val gutterBgPaint = Paint().apply {
+        isAntiAlias = true
         color = Color.parseColor("#F0F0F0")
     }
-    private val gutterDividerPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+    private val gutterDividerPaint = Paint().apply {
+        isAntiAlias = true
         color = Color.parseColor("#D0D0D0")
         strokeWidth = 1.5f
     }
-    private val lineNumberPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+    private val lineNumberPaint = Paint().apply {
+        isAntiAlias = true
         color = Color.parseColor("#888888")
         textAlign = Paint.Align.RIGHT
     }
-    private val currentLinePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+    private val currentLinePaint = Paint().apply {
+        isAntiAlias = true
         color = Color.parseColor("#1A666666")
     }
 

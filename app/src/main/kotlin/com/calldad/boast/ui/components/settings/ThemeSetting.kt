@@ -3,8 +3,6 @@ package com.calldad.boast.ui.components.settings
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -70,14 +68,11 @@ fun ThemeSetting(viewModel: SettingsViewModel) {
                 "orange" to Color(0xFFFF5722)
             )
             
-            LazyVerticalGrid(
-                columns = GridCells.Fixed(3),
+            FlowRow(
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp),
-                modifier = Modifier.height(100.dp)
+                verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                items(themeColors.size) { index ->
-                    val (colorName, color) = themeColors[index]
+                themeColors.forEach { (colorName, color) ->
                     val isSelected = themeColor == colorName
                     Box(
                         modifier = Modifier
