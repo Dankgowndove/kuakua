@@ -118,14 +118,14 @@
 }
 
 # 保留 View 构造函数
--keepclasseswithmembernames class * {
+-keepclasseswithmembers class * {
     public <init>(android.content.Context, android.util.AttributeSet);
 }
--keepclasseswithmembernames class * {
+-keepclasseswithmembers class * {
     public <init>(android.content.Context, android.util.AttributeSet, int);
 }
 
 # 保留本地方法
--keepclasseswithmembernames class * {
+-keepclasseswithmembers class * {
     native <methods>;
 }
