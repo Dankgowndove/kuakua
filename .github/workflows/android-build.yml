@@ -43,6 +43,9 @@ jobs:
       with:
         cache-read-only: ${{ github.ref != 'refs/heads/master' && github.ref != 'refs/heads/main' }}
 
+    - name: Make gradlew executable
+      run: chmod +x ./gradlew
+
     - name: Verify Java version
       run: java -version
 
