@@ -1,5 +1,6 @@
 package com.calldad.boast.music
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.util.Log
 import androidx.media3.common.MediaItem
@@ -24,6 +25,7 @@ class MusicPlayer(private val context: Context) {
     
     private val musicRepository = MusicRepository()
     
+    @SuppressLint("UnsafeOptInUsageError")
     fun initialize() {
         if (exoPlayer == null) {
             // 移动设备优化：降低缓冲大小以减少内存占用
