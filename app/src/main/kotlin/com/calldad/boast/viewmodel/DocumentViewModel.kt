@@ -110,7 +110,7 @@ class DocumentViewModel(application: Application) : AndroidViewModel(application
     
     fun getPreviousDocument(): String? {
         return if (documentHistory.isNotEmpty()) {
-            documentHistory.removeLast()
+            documentHistory.removeAt(documentHistory.lastIndex)
         } else {
             null
         }
