@@ -93,8 +93,8 @@ fun PopupTextsList(
 
                 itemsIndexed(
                     items = texts,
-                    key = { index, item -> item.id }
-                ) { index, popupText ->
+                    key = { _, item -> item.id }
+                ) { _, popupText ->
                     PopupTextItem(
                         popupText = popupText,
                         modifier = Modifier.padding(vertical = 4.dp),

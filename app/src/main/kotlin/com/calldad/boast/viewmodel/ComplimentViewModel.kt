@@ -71,13 +71,7 @@ class ComplimentViewModel(application: Application) : AndroidViewModel(applicati
         }
     }
     
-    fun removeExpiredCompliment(id: String) {
-        viewModelScope.launch {
-            _currentTexts.update { currentList ->
-                currentList.filter { it.id != id }
-            }
-        }
-    }
+    fun removeExpiredCompliment(id: String) = removeCompliment(id)
     
     suspend fun getRandomComplimentText(): String {
         val compliment = repository.getRandomCompliment()

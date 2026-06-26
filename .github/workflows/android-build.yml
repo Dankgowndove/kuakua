@@ -18,6 +18,9 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
+    - name: Validate Gradle wrapper
+      uses: gradle/actions/wrapper-validation@v4
+
     - name: Show environment info
       run: |
         echo "=== 系统信息 ==="
@@ -34,35 +37,23 @@ jobs:
       with:
         java-version: '21'
         distribution: 'temurin'
-        cache: gradle
+
+    - name: Setup Gradle
+      uses: gradle/actions/setup-gradle@v4
+      with:
+        cache-read-only: ${{ github.ref != 'refs/heads/master' && github.ref != 'refs/heads/main' }}
 
     - name: Verify Java version
       run: java -version
 
-    - name: Cache Gradle packages
-      uses: actions/cache@v4
-      with:
-        path: |
-          ~/.gradle/caches
-          ~/.gradle/wrapper
-        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-        restore-keys: |
-          ${{ runner.os }}-gradle-
-
-    - name: Make gradlew executable
-      run: chmod +x ./gradlew
-
-    - name: Clean previous build
-      run: ./gradlew clean
-
     - name: Build Debug APK
-      run: ./gradlew assembleDebug --build-cache
+      run: ./gradlew assembleDebug
 
     - name: Build Release APK
-      run: ./gradlew assembleRelease --build-cache
+      run: ./gradlew assembleRelease
 
     - name: Run Lint Check
-      run: ./gradlew lint || true
+      run: ./gradlew lint
 
     - name: Show build summary
       if: always()
