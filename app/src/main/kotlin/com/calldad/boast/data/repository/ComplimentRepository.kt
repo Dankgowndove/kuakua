@@ -118,7 +118,7 @@ class ComplimentRepository(
         )
 
         fun getCategoryForIndex(index: Int): String {
-            return CATEGORIES[index % CATEGORIES.size]
+            return CATEGORIES[index / 5]
         }
     }
 }

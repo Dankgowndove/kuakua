@@ -167,8 +167,8 @@ fun MainScreen(
                         model = ImageRequest.Builder(LocalContext.current)
                             .data(backgroundImagePath)
                             .crossfade(true)
-                            .memoryCachePolicy(coil.request.CachePolicy.ENABLED)
-                            .diskCachePolicy(coil.request.CachePolicy.ENABLED)
+                            .memoryCachePolicy(CachePolicy.ENABLED)
+                            .diskCachePolicy(CachePolicy.ENABLED)
                             .size(800, 1200)  // 限制图片尺寸以减少内存占用
                             .build(),
                         contentDescription = "背景图片",

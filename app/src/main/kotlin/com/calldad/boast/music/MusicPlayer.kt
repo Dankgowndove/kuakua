@@ -25,7 +25,7 @@ class MusicPlayer(private val context: Context) {
     
     private val musicRepository = MusicRepository()
     
-    @androidx.annotation.OptIn(UnstableApi::class)
+    @OptIn(UnstableApi::class)
     fun initialize() {
         if (exoPlayer == null) {
             // 移动设备优化：降低缓冲大小以减少内存占用

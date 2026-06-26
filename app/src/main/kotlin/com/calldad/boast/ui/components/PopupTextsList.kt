@@ -60,11 +60,10 @@ fun PopupTextsList(
     // 获取LazyColumn的滚动状态
     val listState = rememberLazyListState()
     
-    // 当列表变化时，自动滚动到底部（显示最新的夸赞语句）
+    // 当列表变化时，滚动到最新项（reverseLayout 下 index=0 在底部）
     LaunchedEffect(texts.size) {
         if (texts.isNotEmpty()) {
-            // 平滑滚动到最后一项
-            listState.animateScrollToItem(index = texts.size - 1)
+            listState.animateScrollToItem(index = 0)
         }
     }
     
@@ -84,25 +83,23 @@ fun PopupTextsList(
             LazyColumn(
                 state = listState,
                 modifier = Modifier.fillMaxSize(),
-                reverseLayout = true, // 反向排列：最新的在最上面
+                reverseLayout = true,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                // 使用itemsIndexed渲染列表项，提供索引用于动画
+                // 底部间距率先声明，reverseLayout 会将其置于底部
+                item {
+                    Box(modifier = Modifier.padding(bottom = 100.dp))
+                }
+
                 itemsIndexed(
                     items = texts,
-                    key = { index, item -> item.id } // 使用唯一ID作为key，优化重组
+                    key = { index, item -> item.id }
                 ) { index, popupText ->
-                    // 渲染单个弹窗文字项，传递onExpired回调
                     PopupTextItem(
                         popupText = popupText,
                         modifier = Modifier.padding(vertical = 4.dp),
                         onExpired = onExpired
                     )
-                }
-                
-                // 添加底部内边距，避免最后一项被按钮遮挡
-                item {
-                    Box(modifier = Modifier.padding(bottom = 100.dp))
                 }
             }
         }

@@ -34,7 +34,7 @@ import androidx.compose.ui.viewinterop.AndroidView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.text.NumberFormat
-import kotlin.text.RegexOption
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
