@@ -45,8 +45,6 @@ android {
         compose = true
         buildConfig = false
         aidl = false
-        renderScript = false
-        shaders = false
     }
 
     compileOptions {
@@ -84,6 +82,10 @@ ksp {
     arg("room.schemaLocation", "$projectDir/schemas")
     arg("room.incremental", "true")
     arg("room.generateKotlin", "true")
+}
+
+configurations.all {
+    exclude(group = "org.jetbrains", module = "annotations-java5")
 }
 
 dependencies {
