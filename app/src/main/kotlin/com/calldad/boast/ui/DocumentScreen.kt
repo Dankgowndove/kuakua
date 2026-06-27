@@ -225,7 +225,6 @@ fun DocumentScreen(
                     Column(
                         modifier = Modifier
                             .fillMaxSize()
-                            .padding(16.dp)
                             .verticalScroll(rememberScrollState())
                     ) {
                         AndroidView(
@@ -234,9 +233,10 @@ fun DocumentScreen(
                                     setText(markwon.toMarkdown(documentContent))
                                     setMovementMethod(android.text.method.LinkMovementMethod.getInstance())
                                     setTextAppearance(context, android.R.style.TextAppearance_Medium)
+                                    setPadding(24, 16, 24, 16)
                                 }
                             },
-                            modifier = Modifier.fillMaxSize()
+                            modifier = Modifier.fillMaxWidth()
                         )
                     }
                 }
@@ -306,12 +306,12 @@ fun DocumentVersionInfo() {
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Text(
-                text = "文档版本：1.1",
+                text = "文档版本：1.2",
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
             Text(
-                text = "更新日期：2026-06-19",
+                text = "更新日期：2026-06-26",
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )

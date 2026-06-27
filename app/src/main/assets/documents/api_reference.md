@@ -100,50 +100,6 @@ abstract class ComplimentDatabase : RoomDatabase() {
 }
 ```
 
-### 音乐模块
-
-#### MusicPlayer
-
-封装 ExoPlayer 播放逻辑。
-
-```kotlin
-class MusicPlayer(private val context: Context) {
-    val isPlaying: StateFlow<Boolean>
-    fun playMusic(index: Int)
-    fun pauseMusic()
-    fun setVolume(volume: Float)
-}
-```
-
-## 数据模型
-
-### PopupTextData
-
-夸赞语句数据类。
-
-```kotlin
-data class PopupTextData(
-    val id: String,
-    val text: String
-)
-```
-
-### ComplimentEntity
-
-数据库实体。
-
-```kotlin
-@Entity(tableName = "compliments")
-data class ComplimentEntity(
-    @PrimaryKey(autoGenerate = true)
-    val id: Long = 0,
-    val text: String,
-    val category: String,
-    val isCustom: Boolean = true,
-    val createdAt: Long = System.currentTimeMillis()
-)
-```
-
 ## 开发指南
 
 ### 添加新的设置项
@@ -165,12 +121,11 @@ data class ComplimentEntity(
 
 ## 依赖说明
 
-主要依赖库：
-
-- Jetpack Compose：UI 框架
+- Jetpack Compose + Material3：UI 框架
 - Navigation Compose：导航组件
-- DataStore：数据持久化
+- DataStore Preferences：数据持久化
 - ExoPlayer：音乐播放
 - Room：本地数据库
 - Coil：图片加载
-- Markwon：Markdown 解析
+- Markwon + Prism4j：Markdown 解析和代码高亮
+- Gson：JSON 序列化

@@ -4,8 +4,11 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
@@ -17,7 +20,9 @@ fun ThemeSetting(viewModel: SettingsViewModel) {
     val themeColor by viewModel.themeColor.collectAsState()
     
     Card(
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(20.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
         Column(
             modifier = Modifier
@@ -69,29 +74,36 @@ fun ThemeSetting(viewModel: SettingsViewModel) {
             )
             
             FlowRow(
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp)
+                horizontalArrangement = Arrangement.spacedBy(12.dp),
+                verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 themeColors.forEach { (colorName, color) ->
                     val isSelected = themeColor == colorName
                     Box(
                         modifier = Modifier
-                            .size(60.dp)
-                            .clickable { viewModel.setThemeColor(colorName) }
+                            .size(56.dp)
+                            .clickable { viewModel.setThemeColor(colorName) },
+                        contentAlignment = Alignment.Center
                     ) {
-                        Box(
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .background(
-                                    color = color,
-                                    shape = RoundedCornerShape(8.dp)
-                                )
-                        )
-                        if (isSelected) {
-                            Surface(
-                                color = Color.White.copy(alpha = 0.3f),
-                                shape = RoundedCornerShape(8.dp)
-                            ) {}
+                        Surface(
+                            modifier = Modifier.fillMaxSize(),
+                            shape = RoundedCornerShape(16.dp),
+                            color = color,
+                            tonalElevation = if (isSelected) 4.dp else 0.dp,
+                            border = if (isSelected) {
+                                androidx.compose.foundation.BorderStroke(2.dp, MaterialTheme.colorScheme.onSurface)
+                            } else null
+                        ) {
+                            if (isSelected) {
+                                Box(contentAlignment = Alignment.Center) {
+                                    Icon(
+                                        Icons.Default.Check,
+                                        contentDescription = "已选择",
+                                        tint = Color.White,
+                                        modifier = Modifier.size(24.dp)
+                                    )
+                                }
+                            }
                         }
                     }
                 }

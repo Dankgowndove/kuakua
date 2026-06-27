@@ -3,10 +3,9 @@
 ## 技术栈
 
 - **开发语言**：Kotlin
-- **UI框架**：Jetpack Compose
-- **设计规范**：Material Design 3
+- **UI框架**：Jetpack Compose + Material Design 3
 - **最低版本**：Android 6.0 (API 23)
-- **目标版本**：Android 16 (API 36)
+- **目标版本**：Android 16 (API 37)
 
 ## 架构模式
 
@@ -23,13 +22,11 @@
    - ComplimentViewModel：管理夸赞语句状态
    - SettingsViewModel：管理设置状态
    - DocumentViewModel：管理文档状态
-   - 负责业务逻辑和状态管理
 
 3. **Model 层**
    - 数据实体（Entity）
    - 数据访问对象（DAO）
    - 数据仓库（Repository）
-   - 负责数据存储和获取
 
 ## 核心模块
 
@@ -41,20 +38,24 @@
 ### 2. 音乐播放
 
 - **ExoPlayer**：播放背景音乐
-- **MusicPlayer**：封装播放器逻辑
-- **MusicRepository**：管理音乐资源
+- 支持多首音乐切换和音量控制
 
 ### 3. 导航系统
 
 - **Navigation Compose**：页面导航
-- **NavGraph**：定义导航路由
-- **Screen**：路由定义
+- 支持文档历史记录浏览
 
 ### 4. 文档系统
 
-- **Markdown**：文档格式
+- **Markwon**：Markdown 渲染
 - **Assets**：存储文档资源
-- **DocumentViewModel**：文档加载逻辑
+- 支持文档内搜索
+
+### 5. 主题系统
+
+- 支持动态取色（Android 12+）
+- 多种预设颜色方案
+- 暗色/亮色模式切换
 
 ## 数据流向
 
@@ -64,25 +65,8 @@
            UI 更新
 ```
 
-## 组件关系
-
-```
-MainActivity
-    ├─ NavGraph
-    │   ├─ MainScreen
-    │   │   └─ ComplimentViewModel
-    │   ├─ SettingsScreen
-    │   │   └─ SettingsViewModel
-    │   ├─ DocumentScreen
-    │   │    └─ DocumentViewModel
-    │   └─ NoteEditorScreen
-    ├─ MusicPlayer
-    └─ AppPreferences
-```
-
 ## 设计原则
 
 1. **单一职责**：每个类和模块只负责一个功能
-2. **依赖注入**：使用依赖注入管理组件依赖
-3. **响应式编程**：使用 Flow 和 StateFlow 实现响应式数据流
-4. **生命周期感知**：使用 ViewModel 管理生命周期相关状态
+2. **响应式编程**：使用 Flow 和 StateFlow 实现响应式数据流
+3. **生命周期感知**：使用 ViewModel 管理生命周期相关状态

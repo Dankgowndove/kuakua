@@ -40,6 +40,7 @@ class DocumentViewModel(application: Application) : AndroidViewModel(application
     
     fun loadDocument(documentId: String) {
         viewModelScope.launch {
+            _documentContent.value = ""
             _isLoading.value = true
             _error.value = null
             
@@ -53,11 +54,9 @@ class DocumentViewModel(application: Application) : AndroidViewModel(application
                     else -> "documents/README.md"
                 }
                 
-                // 使用缓存机制
                 val content = documentCache[documentId] ?: loadMarkdownFromAssets(fileName)
                 documentCache[documentId] = content
                 
-                // 添加到历史记录
                 currentDocumentId?.let { 
                     if (documentHistory.isEmpty() || documentHistory.last() != it) {
                         documentHistory.add(it)

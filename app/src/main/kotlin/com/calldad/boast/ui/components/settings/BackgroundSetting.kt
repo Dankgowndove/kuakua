@@ -8,6 +8,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -85,7 +86,9 @@ fun BackgroundSetting(viewModel: SettingsViewModel) {
     }
 
     Card(
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(20.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
         Column(
             modifier = Modifier
@@ -132,29 +135,35 @@ fun BackgroundSetting(viewModel: SettingsViewModel) {
                     "#4CAF50", "#2196F3", "#E91E63"
                 )
                 FlowRow(
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                    verticalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
                     solidColors.forEach { color ->
                         val isSelected = backgroundColor == color
                         Box(
                             modifier = Modifier
-                                .size(60.dp)
-                                .clickable { viewModel.setBackgroundColor(color) }
+                                .size(56.dp)
+                                .clickable { viewModel.setBackgroundColor(color) },
+                            contentAlignment = Alignment.Center
                         ) {
-                            Box(
-                                modifier = Modifier
-                                    .fillMaxSize()
-                                    .background(
-                                        color = Color(android.graphics.Color.parseColor(color)),
-                                        shape = RoundedCornerShape(8.dp)
-                                    )
-                            )
-                            if (isSelected) {
-                                Surface(
-                                    color = Color.White.copy(alpha = 0.3f),
-                                    shape = RoundedCornerShape(8.dp)
-                                ) {}
+                            Surface(
+                                modifier = Modifier.fillMaxSize(),
+                                shape = RoundedCornerShape(16.dp),
+                                color = Color(android.graphics.Color.parseColor(color)),
+                                border = if (isSelected) {
+                                    androidx.compose.foundation.BorderStroke(2.dp, MaterialTheme.colorScheme.onSurface)
+                                } else null
+                            ) {
+                                if (isSelected) {
+                                    Box(contentAlignment = Alignment.Center) {
+                                        Icon(
+                                            Icons.Default.Check,
+                                            contentDescription = "已选择",
+                                            tint = Color.White,
+                                            modifier = Modifier.size(24.dp)
+                                        )
+                                    }
+                                }
                             }
                         }
                     }
@@ -171,11 +180,11 @@ fun BackgroundSetting(viewModel: SettingsViewModel) {
                     "linear|#4CAF50|#388E3C"
                 )
                 Column(
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                    verticalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
                     gradients.chunked(2).forEach { rowGradients ->
                         Row(
-                            horizontalArrangement = Arrangement.spacedBy(8.dp),
+                            horizontalArrangement = Arrangement.spacedBy(12.dp),
                             modifier = Modifier.fillMaxWidth()
                         ) {
                             rowGradients.forEach { gradient ->
@@ -184,26 +193,40 @@ fun BackgroundSetting(viewModel: SettingsViewModel) {
                                 Box(
                                     modifier = Modifier
                                         .weight(1f)
-                                        .height(50.dp)
-                                        .clickable { viewModel.setBackgroundGradient(gradient) }
+                                        .height(56.dp)
+                                        .clickable { viewModel.setBackgroundGradient(gradient) },
+                                    contentAlignment = Alignment.Center
                                 ) {
-                                    Box(
-                                        modifier = Modifier
-                                            .fillMaxSize()
-                                            .background(
-                                                brush = Brush.linearGradient(
-                                                    colors = colors.map {
-                                                        Color(android.graphics.Color.parseColor(it))
-                                                    }
+                                    Surface(
+                                        modifier = Modifier.fillMaxSize(),
+                                        shape = RoundedCornerShape(16.dp),
+                                        color = Color.Transparent,
+                                        border = if (isSelected) {
+                                            androidx.compose.foundation.BorderStroke(2.dp, MaterialTheme.colorScheme.onSurface)
+                                        } else null
+                                    ) {
+                                        Box(
+                                            modifier = Modifier
+                                                .fillMaxSize()
+                                                .background(
+                                                    brush = Brush.linearGradient(
+                                                        colors = colors.map {
+                                                            Color(android.graphics.Color.parseColor(it))
+                                                        }
+                                                    ),
+                                                    shape = RoundedCornerShape(16.dp)
                                                 ),
-                                                shape = RoundedCornerShape(8.dp)
-                                            )
-                                    )
-                                    if (isSelected) {
-                                        Surface(
-                                            color = Color.White.copy(alpha = 0.3f),
-                                            shape = RoundedCornerShape(8.dp)
-                                        ) {}
+                                            contentAlignment = Alignment.Center
+                                        ) {
+                                            if (isSelected) {
+                                                Icon(
+                                                    Icons.Default.Check,
+                                                    contentDescription = "已选择",
+                                                    tint = Color.White,
+                                                    modifier = Modifier.size(24.dp)
+                                                )
+                                            }
+                                        }
                                     }
                                 }
                             }

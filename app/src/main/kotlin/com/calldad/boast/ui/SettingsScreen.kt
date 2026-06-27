@@ -2,6 +2,7 @@ package com.calldad.boast.ui
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
@@ -42,14 +43,10 @@ fun SettingsScreen(
                 .fillMaxSize()
                 .padding(paddingValues),
             contentPadding = PaddingValues(16.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             item {
-                Text(
-                    text = "背景音乐",
-                    style = MaterialTheme.typography.titleMedium,
-                    color = MaterialTheme.colorScheme.primary
-                )
+                SectionTitle("背景音乐")
             }
             
             item {
@@ -57,11 +54,7 @@ fun SettingsScreen(
             }
             
             item {
-                Text(
-                    text = "背景设置",
-                    style = MaterialTheme.typography.titleMedium,
-                    color = MaterialTheme.colorScheme.primary
-                )
+                SectionTitle("背景设置")
             }
             
             item {
@@ -69,11 +62,7 @@ fun SettingsScreen(
             }
             
             item {
-                Text(
-                    text = "主题设置",
-                    style = MaterialTheme.typography.titleMedium,
-                    color = MaterialTheme.colorScheme.primary
-                )
+                SectionTitle("主题设置")
             }
             
             item {
@@ -81,11 +70,7 @@ fun SettingsScreen(
             }
             
             item {
-                Text(
-                    text = "词库管理",
-                    style = MaterialTheme.typography.titleMedium,
-                    color = MaterialTheme.colorScheme.primary
-                )
+                SectionTitle("词库管理")
             }
             
             item {
@@ -93,11 +78,7 @@ fun SettingsScreen(
             }
             
             item {
-                Text(
-                    text = "文档",
-                    style = MaterialTheme.typography.titleMedium,
-                    color = MaterialTheme.colorScheme.primary
-                )
+                SectionTitle("文档")
             }
             
             item {
@@ -108,17 +89,15 @@ fun SettingsScreen(
             }
             
             item {
-                Text(
-                    text = "工具箱",
-                    style = MaterialTheme.typography.titleMedium,
-                    color = MaterialTheme.colorScheme.primary
-                )
+                SectionTitle("工具箱")
             }
             
             item {
                 Card(
                     modifier = Modifier.fillMaxWidth(),
-                    onClick = onNavigateToEditor
+                    onClick = onNavigateToEditor,
+                    shape = RoundedCornerShape(20.dp),
+                    elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
                 ) {
                     ListItem(
                         headlineContent = { Text("文本编辑器") },
@@ -132,6 +111,20 @@ fun SettingsScreen(
                     )
                 }
             }
+            
+            item {
+                Spacer(modifier = Modifier.height(16.dp))
+            }
         }
     }
+}
+
+@Composable
+private fun SectionTitle(title: String) {
+    Text(
+        text = title,
+        style = MaterialTheme.typography.titleMedium,
+        color = MaterialTheme.colorScheme.primary,
+        modifier = Modifier.padding(start = 4.dp, top = 4.dp)
+    )
 }
