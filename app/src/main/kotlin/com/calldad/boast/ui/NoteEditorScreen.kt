@@ -466,15 +466,16 @@ private fun FindReplaceDialog(
 ) {
     var findText by remember { mutableStateOf("") }
     var replaceText by remember { mutableStateOf("") }
-    var matchCount by remember { mutableIntStateOf(0) }
     var caseSensitive by remember { mutableStateOf(false) }
 
-    remember(findText, text, caseSensitive) {
-        if (findText.isNotEmpty()) {
-            val options: Set<RegexOption> = if (caseSensitive) emptySet() else setOf(RegexOption.IGNORE_CASE)
-            matchCount = Regex(Regex.escape(findText), options).findAll(text).count()
-        } else {
-            matchCount = 0
+    val matchCount by remember(findText, text, caseSensitive) {
+        derivedStateOf {
+            if (findText.isNotEmpty()) {
+                val options: Set<RegexOption> = if (caseSensitive) emptySet() else setOf(RegexOption.IGNORE_CASE)
+                Regex(Regex.escape(findText), options).findAll(text).count()
+            } else {
+                0
+            }
         }
     }
 
